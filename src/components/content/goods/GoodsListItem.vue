@@ -1,10 +1,10 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsItem.show.img" alt @load="loadMore" />
+  <div class="goods-item" @click="itemClick">
+    <img v-lazy="showImg" alt @load="itemImgLoad" />
     <div class="goods-info">
-      <p>{{goodsItem.title}}</p>
-      <span class="price">{{goodsItem.price}}</span>
-      <span class="collect">{{goodsItem.cfav}}</span>
+      <p>{{items.title}}</p>
+      <span class="price">{{items.price}}</span>
+      <span class="collect">{{items.cfav}}</span>
     </div>
   </div>
 </template>
@@ -13,16 +13,24 @@
 export default {
   name: "GoodsListItem",
   props: {
-    goodsItem: {
+    items: {
       type: Object,
       default() {
         return {};
       }
     }
   },
+  computed: {
+    showImg() {
+      return this.items.image || this.items.show.img;
+    }
+  },
   methods: {
-    loadMore() {
-      this.$bus.$emit("itemImgLoad");
+    itemImgLoad() {
+      this.$bus.$emit("loadMore");
+    },
+    itemClick() {
+      this.$router.push("/detail/" + this.items.iid);
     }
   }
 };

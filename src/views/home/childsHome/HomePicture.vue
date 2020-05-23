@@ -1,19 +1,19 @@
 <template>
-  <div class="home-feature">
+  <div class="home-picture">
     <a href="https://act.mogujie.com/zzlx67">
-      <img src="~assets/img/home/recommend_bg.jpg" alt />
+      <img src="~assets/img/home/recommend_bg.jpg" />
     </a>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HomeFeatureView"
+  name: "HomePicture"
 };
 </script>
 
 <style scoped>
-.home-feature img {
+.home-picture img {
   width: 100%;
 }
 </style>
