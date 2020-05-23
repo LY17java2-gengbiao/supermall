@@ -1,4 +1,6 @@
+//用于存放关于首页的所有网络请求
 import { request } from './request'
+
 //获取首页的多个数据
 export function getHomeMultidata() {
     return request({

@@ -61,11 +61,9 @@ export default {
       //先判断一下 this.scroll是否为空
       this.scroll && this.scroll.refresh();
     },
-    //到达底部后可以再次加载数据
     finishPullUp() {
       this.scroll && this.scroll.finishPullUp();
     },
-    //获取最后的y值
     getScrollY() {
       return this.scroll ? this.scroll.y : 0;
     }
