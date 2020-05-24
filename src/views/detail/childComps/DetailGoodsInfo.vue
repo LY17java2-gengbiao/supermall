@@ -1,12 +1,16 @@
 <template>
+  <!-- 如果detailInfo的长度是0就不进行渲染-->
   <div v-if="Object.keys(detailInfo).length !== 0" class="goods-info">
     <div class="info-desc clear-fix">
       <div class="start"></div>
+      <!-- 描述内容-->
       <div class="desc">{{detailInfo.desc}}</div>
       <div class="end"></div>
     </div>
+    <!--简短介绍===> 例子:  穿着效果-->
     <div class="info-key">{{detailInfo.detailImage[0].key}}</div>
     <div class="info-list">
+      <!--一堆图片-->
       <img v-for="(item, index) in detailInfo.detailImage[0].list" :src="item" alt @load="LoadMore" />
     </div>
   </div>

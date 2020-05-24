@@ -8,15 +8,21 @@
           <i class="arrow-right"></i>
         </div>
       </div>
-
+      <!--展示客户信息-->
       <div class="info-user">
+        <!--客户头像-->
         <img :src="commentInfo.user.avatar" alt />
+        <!--客户名称-->
         <span>{{commentInfo.user.uname}}</span>
       </div>
+
       <div class="info-detail">
+        <!--客户评价-->
         <p>{{commentInfo.content}}</p>
         <div class="info-other">
+          <!--created:时间戳  showDate过滤器!将时间戳转换成想要的格式-->
           <span class="date">{{commentInfo.created | showDate}}</span>
+          <!--产品的状态,格式-->
           <span>{{commentInfo.style}}</span>
         </div>
         <div class="info-imgs">

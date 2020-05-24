@@ -1,10 +1,16 @@
 <template>
   <div id="detail">
+    <!--导航栏-->
     <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="nav" />
+    <!--better-scroll-->
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
+      <!--轮播图-->
       <detail-swiper :rotation="rotation" />
+      <!--获取商品信息-->
       <detail-base-info :goods="goods" />
+      <!--获取商家信息-->
       <detail-shop :shop="shops" />
+      <!--获取店铺信息========>还有一堆图片哟-->
       <detail-goods-info :detailInfo="detailInfo" @imgLoad="imgLoad" />
       <!--参数-->
       <detail-param-info ref="params" :paramInfo="paramInfo" />
@@ -134,9 +140,11 @@ export default {
     },
     //监听滚动事件
     contentScroll(position) {
-      //获取y值
+      //获取滚动的y值
       const positionY = -position.y;
+      //获取themeTopYs数组的长度
       const length = this.themeTopYs.length;
+      //for循环遍历, 我们知道长度有5个,最后一个是number的最大值
       for (let i = 0; i < length - 1; i++) {
         if (
           this.currentIndex != i &&
@@ -146,31 +154,20 @@ export default {
           this.currentIndex = i;
           this.$refs.nav.currentIndex = this.currentIndex;
         }
-        /*   if (
-          this.currentIndex != i &&
-          ((i < length - 1 &&
-            positionY >= this.themeTopYs[i] &&
-            positionY < this.themeTopYs[i + 1]) ||
-            (i === length - 1 && positionY >= this.themeTopYs[i]))
-        ) {
-          this.currentIndex = i;
-          this.$refs.nav.currentIndex = this.currentIndex;
-        } */
       }
+      //混入: mixin中的是否显示返回顶部方法
       this.listenShowBackTop(position);
     },
     //监听navbar点击事件
     titleClick(index) {
       console.log(index);
-      //之前设置的44px需要减去
       this.$refs.scroll.ScrollTo(0, -this.themeTopYs[index], 200);
     },
     //获取推荐数据
     getRecommend() {
       getRecommend().then(res => {
-        console.log("推荐数据");
-
         this.recommend = res.data.list;
+        console.log("推荐数据:");
         console.log(this.recommend);
       });
     },
@@ -180,55 +177,35 @@ export default {
     },
     getDetail(iid) {
       getDetail(iid).then(res => {
+        //获取商品详情页的全部数据 data
         const data = res.result;
-
+        console.log("详情页的所有数据如下:");
+        console.log(data);
         //获取轮播图数据
         this.rotation = data.itemInfo.topImages;
 
-        //获取商品信息
+        //获取商品信息=======>传递到DetailBaseInfo子组件中去
+        //Goods是在network/detail中声明的class类 将获取到的数据当做参数传递过去
         this.goods = new Goods(
           data.itemInfo,
           data.columns,
           data.shopInfo.services
         );
-        console.log(this.goods);
-        //获取商家信息
+        //获取商家信息=======>传递到DetailShop子组件中去
         this.shops = new Shop(data.shopInfo);
-        console.log(this.shops);
         //获取店铺信息的对象
         this.detailInfo = data.detailInfo;
-        console.log(this.detailInfo);
         //获取参数信息
         this.paramInfo = new GoodsParam(
           data.itemParams.info,
           data.itemParams.rule
         );
-        console.log(this.paramInfo);
         //获取评论消息
         if (data.rate.cRate !== 0) {
           this.commentInfo = data.rate.list[0];
         }
-        console.log(this.commentInfo);
-        /*    this.$nextTick(() => {
-          this.themeTopYs = [];
-
-          this.themeTopYs.push(0);
-          this.themeTopYs.push(this.$refs.params.$el.offsetTop);
-          this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-          this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
-          console.log(this.themeTopYs);
-        }); */
       });
     }
-  },
-  updated() {
-    /*    this.themeTopYs = [];
-
-    this.themeTopYs.push(0);
-    this.themeTopYs.push(this.$refs.params.$el.offsetTop);
-    this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-    this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
-    console.log(this.themeTopYs); */
   }
 };
 </script>

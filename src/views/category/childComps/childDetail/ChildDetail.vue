@@ -1,19 +1,16 @@
 <template>
-  <div>
-    <div v-if="Object.keys(goods).length !== 0">
-      <div class="goods">
-        <goods-list-item v-for="item in goods" :items="item"></goods-list-item>
-      </div>
-    </div>
+  <div class="goods">
+    <child-detail-item v-for="item in goods" :goodsitem="item" />
   </div>
 </template>
 
 <script>
-import GoodsListItem from "./GoodsListItem";
+import ChildDetailItem from "./ChildDetailItem";
+
 export default {
-  name: "GoodsList",
+  name: "ChildDetail",
   components: {
-    GoodsListItem
+    ChildDetailItem
   },
   props: {
     goods: {

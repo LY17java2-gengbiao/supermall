@@ -26,6 +26,11 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      isLoad: false
+    };
+  },
   methods: {
     imgLoad() {
       if (!this.isLoad) {

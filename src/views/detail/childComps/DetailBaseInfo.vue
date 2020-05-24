@@ -3,6 +3,10 @@
   如果===0那么说明这个对象里面没有key,说明这是个空的对象,
   v-if如果不是空的才显示(渲染).是空的不渲染-->
   <div v-if="Object.keys(goods).length !== 0" class="base-info">
+    <!--
+      根据network中设计好的,来填入相应的值就可以了,
+      然后就是调整样式了
+    -->
     <div class="info-title">{{goods.title}}</div>
     <div class="info-price">
       <span class="n-price">{{goods.newPrice}}</span>

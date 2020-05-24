@@ -1,5 +1,5 @@
 import { request } from './request'
-
+//获取详情页的所有数据
 export function getDetail(iid) {
     return request({
         url: '/detail',
@@ -9,6 +9,7 @@ export function getDetail(iid) {
     })
 }
 
+/**获取商品的信息 */
 export class Goods {
     constructor(itemInfo, columns, services) {
         this.title = itemInfo.title
@@ -21,7 +22,7 @@ export class Goods {
         this.realPrice = itemInfo.lowNowPrice
     }
 }
-
+/**获取商家的信息 */
 export class Shop {
     constructor(shopInfo) {
         this.logo = shopInfo.shopLogo
@@ -32,7 +33,7 @@ export class Shop {
         this.goodsCount = shopInfo.cGoods
     }
 }
-
+/**获取参数信息 */
 export class GoodsParam {
     constructor(info, rule) {
         //注意:images可能没值(某些商品可能有值,某些商品可能没值)

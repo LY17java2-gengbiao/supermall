@@ -1,16 +1,20 @@
 <template>
   <div class="shop-info">
     <div class="shop-top">
+      <!--商家logo-->
       <img :src="shop.logo" />
+      <!--商家名称-->
       <span class="title">{{shop.name}}</span>
     </div>
     <div class="shop-middle">
       <div class="shop-middle-item shop-middle-left">
         <div class="info-sells">
+          <!--总销量:  使用过滤器-->
           <div class="sells-count">{{shop.sells | sellCountFilter}}</div>
           <div class="sells-text">总销量</div>
         </div>
         <div class="info-goods">
+          <!--全部宝贝-->
           <div class="goods-count">{{shop.goodsCount}}</div>
           <div class="goods-text">全部宝贝</div>
         </div>
@@ -42,8 +46,11 @@ export default {
     }
   },
   filters: {
+    //过滤器
     sellCountFilter: function(value) {
+      /**如果总销量小于1万,那就直接返回 */
       if (value < 10000) return value;
+      /**如果大于1万,就将值的小数点向左移4位,并且只保留1位小数 */
       return (value / 10000).toFixed(1) + "万";
     }
   }
@@ -84,6 +91,7 @@ export default {
   justify-content: space-evenly;
   color: #333;
   text-align: center;
+  /* css生成一个分割线  */
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 .sells-count,
